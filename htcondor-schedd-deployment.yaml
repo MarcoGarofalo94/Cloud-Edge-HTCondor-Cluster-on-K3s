@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -6,6 +6,9 @@ metadata:
   name: htcondor-schedd
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: htcondor-schedd
   template:
     metadata:
       labels:
@@ -13,7 +16,7 @@ spec:
     spec:
       containers:
       - name: htcondor-schedd
-        image: alahiff/htcondor-schedd:latest
+        image: marcog94/htcondor:scheduler
         resources:
           requests:
             memory: "1.0Gi"
