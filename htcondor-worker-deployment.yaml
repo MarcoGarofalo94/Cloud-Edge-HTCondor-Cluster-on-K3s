@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: htcondor-worker
-        image: marcog94/htcondor:scheduler
+        image: marcog94/htcondor:worker
         resources:
           requests:
             memory: "1.0Gi"
