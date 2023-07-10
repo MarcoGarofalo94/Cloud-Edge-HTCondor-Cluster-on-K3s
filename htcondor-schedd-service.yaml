@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: jupyter-nodeport
   labels:
-    app: htcondor-central-manager
+    app: htcondor-schedd
 spec:
   type: NodePort
   selector:
-    app: htcondor-central-manager
+    app: htcondor-schedd
   ports:
       # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
     - port: 8888
