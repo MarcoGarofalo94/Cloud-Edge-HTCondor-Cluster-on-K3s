@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
       - name: htcondor-schedd
+        imagePullPolicy: Always
         image: marcog94/htcondor:scheduler
         resources:
           requests:

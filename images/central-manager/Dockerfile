@@ -1,4 +1,4 @@
-FROM centos:8
+FROM  --platform=linux/amd64 centos:8
 
 RUN cd /etc/yum.repos.d/
 RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
@@ -27,15 +27,7 @@ RUN yum -y install condor
 # Install Nano
 RUN yum -y install nano
 
-# Install Java 1.8.0
-RUN yum install -y java-1.8.0-openjdk-devel
 
-
-
-#Install pegasus
-RUN curl --output /etc/yum.repos.d/pegasus.repo https://download.pegasus.isi.edu/pegasus/rhel/8/pegasus.repo
-RUN dnf install -y epel-release
-RUN dnf install -y --enablerepo powertools pegasus
 
 COPY condor_config.local /etc/condor/
 COPY central-manager /etc/condor/config.d

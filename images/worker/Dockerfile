@@ -1,4 +1,4 @@
-FROM centos:8
+FROM --platform=linux/amd64 centos:8
 
 RUN cd /etc/yum.repos.d/
 RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*

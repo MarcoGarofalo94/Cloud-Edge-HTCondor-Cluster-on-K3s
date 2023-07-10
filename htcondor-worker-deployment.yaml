@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
       - name: htcondor-worker
+        imagePullPolicy: Always
         image: marcog94/htcondor:worker
         resources:
           requests:
