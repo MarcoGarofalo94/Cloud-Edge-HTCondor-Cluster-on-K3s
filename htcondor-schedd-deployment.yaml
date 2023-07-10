@@ -17,7 +17,7 @@ spec:
       containers:
       - name: htcondor-schedd
         imagePullPolicy: Always
-        image: marcog94/htcondor:scheduler
+        image: marcog94/htcondor:scheduler-rhel7
         resources:
           requests:
             memory: "1.0Gi"
