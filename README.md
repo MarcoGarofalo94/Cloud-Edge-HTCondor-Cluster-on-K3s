@@ -12,8 +12,8 @@ kubectl create secret generic htcondor-pool-password --from-file=/tmp/password
 ### Deploy the central manager, schedd and a worker node
 Firstly deploy the central manager:
 ```
-kubectl create -f htcondor-central-manager-service.yaml
-kubectl create -f htcondor-central-manager-deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/MarcoGarofalo94/simple-htcondor-cluster-on-kubernetes/master/htcondor-central-manager-service.yaml
+kubectl apply -f https://raw.githubusercontent.com/MarcoGarofalo94/simple-htcondor-cluster-on-kubernetes/master/htcondor-central-manager-deployment.yaml
 ```
 Once the central manager is running, i.e.
 ```
@@ -23,8 +23,8 @@ htcondor-central-manager   1         1         1            1           17h
 ```
 deploy the schedd and worker node:
 ```
-kubectl create -f htcondor-schedd-deployment.yaml
-kubectl create -f htcondor-worker-deployment.yaml
+kubectl create -f https://raw.githubusercontent.com/MarcoGarofalo94/simple-htcondor-cluster-on-kubernetes/master/htcondor-schedd-deployment.yaml
+kubectl create -f https://raw.githubusercontent.com/MarcoGarofalo94/simple-htcondor-cluster-on-kubernetes/master/htcondor-worker-deployment.yaml
 ```
 After a little while you should see 3 running pods:
 ```

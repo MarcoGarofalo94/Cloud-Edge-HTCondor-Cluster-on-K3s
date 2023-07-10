@@ -9,18 +9,14 @@ RUN yum update -y
 # Dependencies
 RUN yum -y install wget
 
-
 # Install yum repository
-#RUN cd /etc/yum.repos.d && wget https://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel8.repo
+RUN cd /etc/yum.repos.d && wget http://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel8.repo
 
 # Import signing key
-#RUN wget http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && rpm --import RPM-GPG-KEY-HTCondor
+RUN wget http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && rpm --import RPM-GPG-KEY-HTCondor
 
-RUN  dnf --enablerepo=powertools install boost-python3 -y
 # Install HTCondor
-#RUN yum -y install condor
-RUN yum install -y https://research.cs.wisc.edu/htcondor/repo/9.0/htcondor-release-current.el8.noarch.rpm
-RUN yum install -y condor
+RUN yum -y install condor
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
