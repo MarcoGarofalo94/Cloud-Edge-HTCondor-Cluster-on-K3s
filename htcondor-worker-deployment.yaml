@@ -17,7 +17,7 @@ spec:
       containers:
       - name: htcondor-worker
         imagePullPolicy: Always
-        image: marcog94/htcondor:worker
+        image: marcog94/worker:9.0.x
         resources:
           requests:
             memory: "1.0Gi"
