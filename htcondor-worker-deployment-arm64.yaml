@@ -5,7 +5,7 @@ metadata:
     app: htcondor-worker-arm64
   name: htcondor-worker-arm64
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: htcondor-worker-arm64
@@ -37,7 +37,7 @@ spec:
         - containerPort: 9618
           protocol: TCP
       nodeSelector:
-        beta.kubernetes.io/arch: arm64
+        kubernetes.io/arch: arm64
       volumes:
       - name: pool-password
         secret:
