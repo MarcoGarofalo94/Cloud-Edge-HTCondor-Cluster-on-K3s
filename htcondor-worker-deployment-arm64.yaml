@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: htcondor-worker
-  name: htcondor-worker
+    app: htcondor-worker-arm64
+  name: htcondor-worker-arm64
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: htcondor-worker
+      app: htcondor-worker-arm64
   template:
     metadata:
       labels:
-        app: htcondor-worker
+        app: htcondor-worker-arm64
     spec:
       containers:
-      - name: htcondor-worker
+      - name: htcondor-worker-arm64
         imagePullPolicy: Always
         image: marcog94/worker:9.0.x-arm64
         resources:
