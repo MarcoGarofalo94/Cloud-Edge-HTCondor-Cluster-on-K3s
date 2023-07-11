@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 centos:8
+FROM centos:8
 
 RUN cd /etc/yum.repos.d/
 RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
@@ -25,7 +25,7 @@ RUN dnf install -y policycoreutils-python-utils
 RUN  dnf --enablerepo=powertools install boost-python3 -y
 # Install HTCondor
 #RUN yum -y install condor
-RUN yum install -y https://research.cs.wisc.edu/htcondor/repo/9.0/htcondor-release-current.el8.noarch.rpm
+RUN yum install -y https://research.cs.wisc.edu/htcondor/repo/9.x/htcondor-release-current.el8.noarch.rpm
 RUN yum install -y condor
 # Install Nano
 RUN yum -y install nano
