@@ -36,8 +36,8 @@ spec:
         ports:
         - containerPort: 9618
           protocol: TCP
-        nodeSelector:
-          beta.kubernetes.io/arch: arm64
+      nodeSelector:
+        beta.kubernetes.io/arch: arm64
       volumes:
       - name: pool-password
         secret:
