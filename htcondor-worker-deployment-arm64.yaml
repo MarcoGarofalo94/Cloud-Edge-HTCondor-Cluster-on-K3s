@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: htcondor-worker
-        beta.kubernetes.io/arch: arm64
+        nodeSelector:
+          beta.kubernetes.io/arch: arm64
         imagePullPolicy: Always
         image: marcog94/worker:9.0.x-arm64
         resources:
