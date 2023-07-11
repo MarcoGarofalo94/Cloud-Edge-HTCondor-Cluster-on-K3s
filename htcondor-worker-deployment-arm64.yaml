@@ -16,8 +16,6 @@ spec:
     spec:
       containers:
       - name: htcondor-worker
-        nodeSelector:
-          beta.kubernetes.io/arch: arm64
         imagePullPolicy: Always
         image: marcog94/worker:9.0.x-arm64
         resources:
@@ -38,6 +36,8 @@ spec:
         ports:
         - containerPort: 9618
           protocol: TCP
+        nodeSelector:
+          beta.kubernetes.io/arch: arm64
       volumes:
       - name: pool-password
         secret:
