@@ -5,7 +5,7 @@ metadata:
     app: htcondor-worker
   name: htcondor-worker
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: htcondor-worker
@@ -17,7 +17,7 @@ spec:
       containers:
       - name: htcondor-worker
         imagePullPolicy: Always
-        image: marcog94/worker:9.0.x
+        image: marcog94/worker:9.x
         resources:
           requests:
             memory: "1.0Gi"
