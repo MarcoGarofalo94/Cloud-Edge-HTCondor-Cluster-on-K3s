@@ -42,6 +42,8 @@ spec:
             - /usr/local/bin/htcondor-schedd-liveness
           initialDelaySeconds: 10
           periodSeconds: 30
+      nodeSelector:
+        kubernetes.io/arch: amd64
       volumes:
       - name: pool-password
         secret:
