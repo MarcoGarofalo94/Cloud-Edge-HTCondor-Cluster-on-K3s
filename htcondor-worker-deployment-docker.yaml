@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: htcondor-worker
+  name: htcondor-worker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: htcondor-worker
+  template:
+    metadata:
+      labels:
+        app: htcondor-worker
+    spec:
+      containers:
+      - name: htcondor-worker
+        imagePullPolicy: Always
+        image: marcog94/worker:9.x-cont
+        resources:
+          requests:
+            memory: "1.0Gi"
+            cpu: "500m"
+          limits:
+            memory: "1.0Gi"
+            cpu: "500m"
+        env:
+        - name: CONDOR_HOST
+          value: "htcondor-central-manager"
+        - name: SEC_PASSWORD_FILE
+          value: "/etc/condor/pool_password/password"
+        - name: DOCKER_HOST
+          value: unix:///shared/docker.sock
+        volumeMounts:
+          - name: pool-password
+            mountPath: /etc/condor/pool_password
+          - name: docker-shared
+            mountPath: /shared            
+        ports:
+        - containerPort: 9618
+          protocol: TCP
+      - name: dind-daemon
+        image: docker:dind
+        # 64 is the condor group
+        args: ["-G", "64"]
+        resources:
+          limits:
+            memory: "4G"
+        securityContext:
+          privileged: true
+        env:
+          - name: DOCKER_HOST
+            value: unix:///shared/docker.sock
+        volumeMounts:
+          - name: docker-shared
+            mountPath: /shared
+      volumes:
+      - name: docker-shared
+        emptyDir: {}
+      - name: pool-password
+        secret:
+          defaultMode: 0600
+          secretName: htcondor-pool-password
