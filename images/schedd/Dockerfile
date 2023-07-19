@@ -41,9 +41,11 @@ RUN yum install -y java-1.8.0-openjdk-devel
 
 
 #Install pegasus
-RUN curl --output /etc/yum.repos.d/pegasus.repo https://download.pegasus.isi.edu/pegasus/rhel/8/pegasus.repo
-RUN dnf install -y epel-release
-RUN dnf install -y --enablerepo powertools pegasus
+RUN git clone https://github.com/pegasus-isi/pegasus.git
+
+#RUN curl --output /etc/yum.repos.d/pegasus.repo https://download.pegasus.isi.edu/pegasus/rhel/8/pegasus.repo
+#RUN dnf install -y epel-release
+#RUN dnf install -y --enablerepo powertools pegasus
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]

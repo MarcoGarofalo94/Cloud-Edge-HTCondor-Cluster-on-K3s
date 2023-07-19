@@ -94,7 +94,7 @@ RUN mkdir /home/scitech/.pegasus \
 # Get Pegasus 
 RUN git clone https://github.com/pegasus-isi/pegasus.git \
     && cd pegasus \
-    && git checkout 820879c61 -b beta1 \
+    && git checkout 90b73d9 -b beta1 \
     && ant dist \
     && cd dist \
     && mv $(find . -type d -name "pegasus-*") pegasus

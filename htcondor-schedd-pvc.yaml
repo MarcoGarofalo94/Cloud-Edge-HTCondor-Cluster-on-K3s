@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: htcondor-schedd-pvc
+spec:
+  volumeName: htcondor-schedd-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  volumeMode: Filesystem
+  storageClassName: manual
+  selector:
+    matchLabels:
+      app: htcondor-schedd
