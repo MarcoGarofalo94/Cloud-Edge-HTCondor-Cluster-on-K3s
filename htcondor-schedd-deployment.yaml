@@ -44,6 +44,9 @@ spec:
             - /usr/local/bin/htcondor-schedd-liveness
           initialDelaySeconds: 10
           periodSeconds: 30
+      nodeSelector:
+        kubernetes.io/arch: amd64
+        kubernetes.io/hostname: atm-test-new
       volumes:
       - name: wf-volume
         persistentVolumeClaim:

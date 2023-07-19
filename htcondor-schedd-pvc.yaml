@@ -10,7 +10,7 @@ spec:
     requests:
       storage: 2Gi
   volumeMode: Filesystem
-  storageClassName: manual
+  storageClassName: ""
   selector:
     matchLabels:
       app: htcondor-schedd
