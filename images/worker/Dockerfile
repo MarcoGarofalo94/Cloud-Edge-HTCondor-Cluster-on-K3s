@@ -13,6 +13,8 @@ RUN yum -y install wget
 RUN dnf install -y python3
 RUN dnf install -y  python2 python2-chardet
 RUN dnf install -y policycoreutils-python-utils
+RUN adduser marco
+RUN mkdir /home/marco/wf
 
 
 
@@ -35,3 +37,4 @@ COPY condor_config.local /etc/condor/
 COPY worker /etc/condor/config.d/
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
+WORKDIR /home/marco/wf

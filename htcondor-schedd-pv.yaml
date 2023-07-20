@@ -9,5 +9,5 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /home/marco
-    type: Directory
+    path: /home/marco/wf
+    type: DirectoryOrCreate
