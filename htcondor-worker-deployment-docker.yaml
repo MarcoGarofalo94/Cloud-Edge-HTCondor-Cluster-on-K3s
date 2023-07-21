@@ -16,6 +16,8 @@ spec:
     spec:
       containers:
       - name: htcondor-worker
+        securityContext:
+          privileged: true
         imagePullPolicy: Always
         image: marcog94/worker:9.x-cont
         resources:
