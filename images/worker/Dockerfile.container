@@ -7,10 +7,11 @@ LABEL org.opencontainers.image.title="HTCondor Execute image derived from ${BASE
 
 # Create pslots slot users slot1_1 through slot1_64
 RUN \
-   for n in `seq 1 2`; do \
+   for n in `seq 1 1`; do \
        useradd slot1_${n} || exit $?; \
    done
-
+RUN yum install -y sudo
+RUN echo "slot1_1 ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 COPY $PACKAGE_LIST /root/extra-packagelist.txt
 COPY container-install-execute.sh /root/container-install-execute.sh
 RUN bash -x /root/container-install-execute.sh /root/extra-packagelist.txt
