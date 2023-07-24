@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: htcondor-worker-slib-pvc
+spec:
+  volumeName: htcondor-worker-slib-pv
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+  volumeMode: Filesystem
+  storageClassName: ""
+  selector:
+    matchLabels:
+      app: htcondor-worker

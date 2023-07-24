@@ -35,6 +35,8 @@ spec:
         - name: DOCKER_HOST
           value: unix:///shared/docker.sock
         volumeMounts:
+          - name: shared-lib
+            mountPath: /home/slot1_1/shared-lib
           - name: pool-password
             mountPath: /etc/condor/pool_password
           - name: docker-shared
@@ -58,6 +60,9 @@ spec:
           - name: docker-shared
             mountPath: /shared
       volumes:
+      - name: shared-lib
+        persistentVolumeClaim:
+          claimName: htcondor-worker-slib-pvc
       - name: docker-shared
         emptyDir: {}
       - name: pool-password

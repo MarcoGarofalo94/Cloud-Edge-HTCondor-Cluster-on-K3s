@@ -32,6 +32,8 @@ RUN dnf install -y python3
 RUN dnf install -y python2 python2-chardet
 RUN dnf install -y policycoreutils-python-utils
 
+RUN mkdir -p /home/slot1_1/shared-lib
+RUN chown slot1_1:slot1_1 /home/slot1_1/shared-lib
 
 
 # Install yum repository
