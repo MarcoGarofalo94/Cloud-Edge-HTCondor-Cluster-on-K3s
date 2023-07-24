@@ -65,8 +65,8 @@ spec:
       - name: nfs-volume
         nfs: 
       # URL for the NFS server
-        server: 10.43.75.115 # Change this!
-        path: /
+          server: 10.43.75.115 # Change this!
+          path: /
       # - name: shared-lib
       #   persistentVolumeClaim:
       #     claimName: htcondor-worker-slib-pvc
