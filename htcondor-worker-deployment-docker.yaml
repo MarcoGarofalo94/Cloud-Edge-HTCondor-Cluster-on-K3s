@@ -36,7 +36,7 @@ spec:
           value: unix:///shared/docker.sock
         volumeMounts:
           - name: nfs-volume
-            mountPath: /var/nfs
+            mountPath: /home/slot1_1/shared-lib
           # - name: shared-lib
           #   mountPath: /home/slot1_1/shared-lib
           - name: pool-password
@@ -65,7 +65,7 @@ spec:
       - name: nfs-volume
         nfs: 
       # URL for the NFS server
-          server: 192.168.236.33 # Change this!
+          server: "nfs-service.storage.svc.cluster.local" # Change this!
           path: /
       # - name: shared-lib
       #   persistentVolumeClaim:
