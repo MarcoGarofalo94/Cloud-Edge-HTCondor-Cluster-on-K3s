@@ -35,8 +35,8 @@ spec:
         - name: DOCKER_HOST
           value: unix:///shared/docker.sock
         volumeMounts:
-          - name: nfs-volume
-            mountPath: /home/slot1_1/shared-lib
+          - name: nfs-pvc
+            mountPath: /nfs
           # - name: shared-lib
           #   mountPath: /home/slot1_1/shared-lib
           - name: pool-password
@@ -62,11 +62,9 @@ spec:
           - name: docker-shared
             mountPath: /shared
       volumes:
-      - name: nfs-volume
-        nfs: 
-      # URL for the NFS server
-          server: "nfs-service.storage.svc.cluster.local" # Change this!
-          path: /
+      - name: nfs-pvc
+        persistentVolumeClaim:
+          claimName: nfs-claim
       # - name: shared-lib
       #   persistentVolumeClaim:
       #     claimName: htcondor-worker-slib-pvc
