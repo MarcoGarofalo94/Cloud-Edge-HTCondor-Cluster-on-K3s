@@ -5,7 +5,7 @@ metadata:
     app: htcondor-worker
   name: htcondor-worker
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: htcondor-worker
@@ -49,7 +49,7 @@ spec:
       - name: dind-daemon
         image: docker:dind
         # 64 is the condor group
-        args: ["-G", "1"]
+        args: ["-G", "64"]
         resources:
           limits:
             memory: "4G"
