@@ -16,7 +16,7 @@ rc = ReplicaCatalog().add_replica("local", fa, Path(".").resolve() / "f.a")
 tools_container = Container(
                   "tools-container",
                   Container.DOCKER,
-                  image="docker:///marco94/prepoc:latest",
+                  image="docker:///debian",
                   arguments="--shm-size=2g",
                   bypass_staging=True
                )
