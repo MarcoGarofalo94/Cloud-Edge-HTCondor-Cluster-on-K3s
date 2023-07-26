@@ -12,4 +12,3 @@ spec:
   nfs:
     server: 172.16.5.39
     path: /nfs
-    readonly: no
