@@ -3,6 +3,7 @@ apiVersion: v1
 metadata:
   name: nfs-claim
 spec:
+  volumeName: nfs-pv
   storageClassName: nfs-client
   accessModes:
     - ReadWriteMany
