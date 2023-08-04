@@ -38,7 +38,7 @@ spec:
       containers:
       - name: htcondor-worker
         lifecycle:
-          postStart:
+          preStop:
             exec:
               command: ["/bin/sh", "-c", "condor_off -peaceful -drain"]
         securityContext:
