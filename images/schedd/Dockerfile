@@ -42,7 +42,13 @@ RUN mkdir /home/marco/wf
 
 # Install Java 1.8.0
 RUN yum install -y java-1.8.0-openjdk-devel
+RUN yum install -y jq
 
+# Install golang
+RUN dnf -y update && \
+    dnf -y install golang
+ENV GOPATH /go
+ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
 #Install pegasus
 #RUN git clone https://github.com/pegasus-isi/pegasus.git
