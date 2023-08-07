@@ -38,6 +38,9 @@ spec:
         ports:
         - containerPort: 9618
           protocol: TCP
+        - containerPort: 8080
+          protocol: TCP
+          name: http
         livenessProbe:
           exec:
             command:

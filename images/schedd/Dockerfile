@@ -57,5 +57,6 @@ RUN chmod +x ./installer_linux
 RUN SHELL=$SHELL ./installer_linux                         
 RUN source ~/.bash_profile
 COPY docker-entrypoint.sh /
+EXPOSE 8080
 ENTRYPOINT ["/docker-entrypoint.sh"]
 WORKDIR /home/marco/wf
