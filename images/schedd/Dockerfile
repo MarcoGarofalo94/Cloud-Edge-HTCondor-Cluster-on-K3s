@@ -38,17 +38,11 @@ COPY htcondor-schedd-liveness /usr/local/bin/
 RUN adduser marco
 RUN mkdir /home/marco/wf
 
-
-
 # Install Java 1.8.0
 RUN yum install -y java-1.8.0-openjdk-devel
-RUN yum install -y jq
 
-# Install golang
-RUN dnf -y update && \
-    dnf -y install golang
-ENV GOPATH /go
-ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+#Install jq
+RUN yum install -y jq
 
 #Install pegasus
 #RUN git clone https://github.com/pegasus-isi/pegasus.git
@@ -57,6 +51,11 @@ RUN curl --output /etc/yum.repos.d/pegasus.repo https://download.pegasus.isi.edu
 RUN dnf install -y epel-release
 RUN dnf install -y --enablerepo powertools pegasus
 
+# Install golang
+RUN wget https://storage.googleapis.com/golang/getgo/installer_linux
+RUN chmod +x ./installer_linux
+RUN SHELL=$SHELL ./installer_linux                         
+RUN source ~/.bash_profile
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 WORKDIR /home/marco/wf
