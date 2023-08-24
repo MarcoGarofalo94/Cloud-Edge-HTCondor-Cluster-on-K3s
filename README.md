@@ -362,44 +362,14 @@ Accounting none <none>
 
 ## Autoscaling the number of worker nodes
 
+See https://github.com/MarcoGarofalo94/simple-htcondor-cluster-on-kubernetes/tree/master/autoscaling to setup the HorizontalPodAutoscaler with custom metrics.
+
+A potential problem with this approach arises with the downscaling mechanism. If, for some reasons, the HPA decides to downscale the workers while they are computing, we could have a delay in the computation since the job must be re-assigned to some other worker and wait it's completion. To mitigate this problem we used the `lifecycle` mechanism offered by Kubernetes.
+With the `lifecycles` we can run commands (or scripts) at a precise moment during the lifecycle of a POD, more specifically we can run commands right after starting the POD or right before stopping the POD.
+In this setup we used the `preStop` lifecycle in the workers deployment running the command 
+```
+condor_off -peaceful -drain
+``` 
+that basically makes the worker being stopped to communicate with the central manager, ensuring that no new jobs will be assigned to this worker and it will try to complete its running jobs. 
+
 A simple way to do this would be to use a horizontal pod autoscaler. The major problem with this is that downscaling will quite possibly result in worker nodes which are doing useful work being killed. As an alternative, one option is to use a custom controller pod which creates worker node pods as they are needed, i.e. depending on how many idle jobs there are. If the worker node pod is configured to only start new jobs for a limited time period and to exit after being idle for specified time, downscaling will occur naturally.
-
-  
-
-Firstly, create a ConfigMap containing the worker node pod template:
-
-```
-
-kubectl create configmap htcondor-worker-pod-template --from-file=htcondor-worker.json
-
-```
-
-If RBAC authorization is enabled, we need to ensure that the controller pod has the appropriate permissions:
-
-```
-
-kubectl create -f serviceaccount-creator.yaml
-
-kubectl create -f role-pods.yaml
-
-kubectl create rolebinding pods-creator --clusterrole=pods-creator --serviceaccount=default:pod-creator --namespace=default
-
-```
-
-Now we need to run the HTCondor pool controller pod. If RBAC is enabled run the following:
-
-```
-
-kubectl create -f htcondor-pool-deployment-rbac.yaml
-
-```
-
-or if not:
-
-```
-
-kubectl create -f htcondor-pool-deployment.yaml
-
-```
-
-If some jobs are submitted to the schedd, worker node pods will be created as needed.
