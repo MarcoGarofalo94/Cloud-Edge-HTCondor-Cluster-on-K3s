@@ -30,7 +30,7 @@ https://github.com/kubernetes-sigs/prometheus-adapter/blob/master/deploy/README.
 
 We can modify the ConfigMap associated to the Prometheus adapter in order to specificy which queries to perform:
 ```
-kubectl apply -f https://raw.githubusercontent.com/MarcoGarofalo94/simple-htcondor-cluster-on-kubernetes/master/autoscaling/prom-adapter-config.yaml
+kubectl apply -f https://raw.githubusercontent.com/MarcoGarofalo94/simple-htcondor-cluster-on-kubernetes/master/autoscaling/prom-adapater-config.yaml
 # Need to restart te prometheus adapter deployment
 kubectl rollout restart deployment prometheus-adapter -n monitoring
 ```
