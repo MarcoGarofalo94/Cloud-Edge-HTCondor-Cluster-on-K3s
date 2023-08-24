@@ -1,5 +1,5 @@
 
-# A Cloud-Edge HTCndor Cluster running with K3s (lightweight Kubernetes) 
+# A Cloud-Edge HTCondor Cluster running with K3s (lightweight Kubernetes) 
 
 ## Setting up the cluster
 
