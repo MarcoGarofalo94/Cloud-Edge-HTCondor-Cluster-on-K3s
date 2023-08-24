@@ -1,5 +1,5 @@
 
-# A simple HTCondor cluster on Kubernetes
+# A Cloud-Edge HTcondor Cluster running with K3s (lightweight Kubernetes) 
 
 ## Setting up the cluster
 
