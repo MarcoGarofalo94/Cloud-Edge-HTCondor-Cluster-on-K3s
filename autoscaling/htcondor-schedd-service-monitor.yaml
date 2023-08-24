@@ -1,0 +1,37 @@
+kind: ServiceMonitor
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: htcondor-schedd-amd64
+  labels:
+    release: "cluster-monitoring"
+    app: htcondor-schedd
+spec:
+  selector:
+    matchLabels:
+      app: htcondor-schedd
+  endpoints:
+  - port: http
+    path: /metrics/amd64
+  namespaceSelector:
+    matchNames:
+    - default
+
+---
+
+kind: ServiceMonitor
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: htcondor-schedd-arm64
+  labels:
+    release: "cluster-monitoring"
+    app: htcondor-schedd
+spec:
+  selector:
+    matchLabels:
+      app: htcondor-schedd
+  endpoints:
+  - port: http
+    path: /metrics/arm64
+  namespaceSelector:
+    matchNames:
+    - default

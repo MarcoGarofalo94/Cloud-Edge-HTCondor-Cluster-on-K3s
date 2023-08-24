@@ -1,0 +1,38 @@
+kind: HorizontalPodAutoscaler
+apiVersion: autoscaling/v2
+metadata:
+  name: htcondor-schedd-amd64
+spec:
+  scaleTargetRef:
+    # point the HPA at the htcondor-woker-amd64
+    # you created above
+    apiVersion: apps/v1
+    kind: Deployment
+    name: htcondor-worker
+  # autoscale between 1 and 10 replicas
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 200 #for 200 seconds the HPA will not scale down after a scaling operation
+      policies:
+      - type: Percent
+        value: 50
+        periodSeconds: 15
+    scaleUp:
+      stabilizationWindowSeconds: 5
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 5
+  minReplicas: 1
+  maxReplicas: 6
+  metrics: # with the following we can listen for metrics emitted from a deployment different from the scaleTargetRef
+  - type: Object
+    object:
+      describedObject:
+        kind: Service
+        name: htcondor-schedd
+      metric:
+        name: amd64
+      target:
+        type: Value
+        value: 1000m
