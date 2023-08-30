@@ -1,4 +1,5 @@
-FROM  --platform=linux/amd64 centos:8
+
+FROM centos:8 
 
 RUN cd /etc/yum.repos.d/
 RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
@@ -13,9 +14,12 @@ RUN yum -y install wget
 RUN dnf install -y python3
 RUN dnf install -y  python2 python2-chardet
 RUN dnf install -y policycoreutils-python-utils
+RUN yum install -y epel-release
+RUN yum install -y procps
+RUN dnf install -y htop
 
-
-
+COPY preStop.sh /
+RUN chmod +x /preStop.sh
 
 # Install yum repository
 #RUN cd /etc/yum.repos.d && wget https://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel8.repo

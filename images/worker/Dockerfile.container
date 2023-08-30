@@ -11,6 +11,10 @@ RUN \
        useradd slot1_${n} || exit $?; \
    done
 RUN yum install -y sudo
+RUN yum install -y procps
+RUN yum install -y htop
+COPY preStop.sh /
+RUN chmod +x /preStop.sh
 RUN echo "slot1_1 ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 COPY $PACKAGE_LIST /root/extra-packagelist.txt
 COPY container-install-execute.sh /root/container-install-execute.sh

@@ -19,7 +19,7 @@ spec:
         lifecycle:
           preStop:
             exec:
-              command: ["/bin/sh", "-c", "condor_off -peaceful -drain"]
+              command: ["/bin/bash", "/preStop.sh"]
         imagePullPolicy: Always
         image: marcog94/worker:9.0.x-arm64
         resources:

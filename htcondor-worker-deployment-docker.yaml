@@ -40,7 +40,7 @@ spec:
         lifecycle:
           preStop:
             exec:
-              command: ["/bin/sh", "-c", "condor_off -peaceful -drain"]
+              command: ["/bin/bash", "/preStop.sh"]
         securityContext:
         securityContext:
           privileged: true
