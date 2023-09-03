@@ -31,7 +31,7 @@ for USER_ID in $USER_IDS; do
                 break
             fi
 
-            sleep 5  # Adjust the sleep duration as needed
+            sleep 5
         done
 
         echo "All processes for user with UID $USER_ID have finished."
