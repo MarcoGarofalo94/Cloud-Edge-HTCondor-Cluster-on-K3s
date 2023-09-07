@@ -3,6 +3,19 @@ FROM --platform=linux/amd64 ${BASE_IMAGE}
 ARG BASE_IMAGE
 ARG PACKAGE_LIST
 
+RUN yum --enablerepo=extras install epel-release -y
+#Update
+
+RUN yum update -y
+# Dependencies
+RUN yum -y install wget
+RUN pip3 install --upgrade pip
+RUN dnf update -y
+RUN dnf install -y python3
+RUN pip3 install --upgrade cython
+RUN dnf install gcc -y
+RUN pip3 install --upgrade hdbscan
+
 LABEL org.opencontainers.image.title="HTCondor Execute image derived from ${BASE_IMAGE}"
 
 # Create pslots slot users slot1_1 through slot1_64
@@ -25,17 +38,24 @@ COPY condor/*.conf /etc/condor/config.d/
 # RUN cd /etc/yum.repos.d/
 # RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
 # RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
-#Update
-RUN yum update -y
-
-# Dependencies
-RUN yum -y install wget
 
 #Install Python 3
 RUN dnf install -y python3
 RUN dnf install -y python2 python2-chardet
 RUN dnf install -y policycoreutils-python-utils
+RUN pip3 install --upgrade pip
+RUN pip3 install --upgrade setuptools
+RUN pip3 install --upgrade wheel
+RUN pip3 install --upgrade numpy
+RUN pip3 install --upgrade pandas
+RUN pip3 install --upgrade scipy
+RUN pip3 install --upgrade scikit-learn
+RUN pip3 install --upgrade matplotlib
+RUN pip3 install --upgrade prettytable
+RUN pip3 install --upgrade kneed
 
+RUN pip3 install --upgrade pyDOE2
+COPY lime /usr/local/lib64/python3.6/site-packages/
 RUN mkdir /nfs
 RUN chown slot1_1:slot1_1 /nfs
 
