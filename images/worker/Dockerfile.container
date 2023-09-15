@@ -18,7 +18,7 @@ RUN yum install -y procps
 COPY preStop.sh /
 RUN chmod +x /preStop.sh
 RUN echo "slot1_1 ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-COPY $PACKAGE_LIST /root/extra-packagelist.txt
+#COPY $PACKAGE_LIST /root/extra-packagelist.txt
 #COPY container-install-execute.sh /root/container-install-execute.sh
 #RUN bash -x /root/container-install-execute.sh /root/extra-packagelist.txt
 
@@ -54,7 +54,8 @@ RUN chmod 777 /usr/local/bin/*
 COPY lime/* /usr/local/lib64/python3.6/site-packages/lime/
 RUN mkdir /nfs
 RUN chown slot1_1:slot1_1 /nfs
-RUN chmod 777 -R slot1_1
+RUN mkdir /home/times
+RUN chmod 777 -R /home/times
 
 
 # Install yum repository

@@ -44,17 +44,16 @@ spec:
             exec:
               command: ["/bin/bash", "/preStop.sh"]
         securityContext:
-        securityContext:
           privileged: true
         imagePullPolicy: Always
         image: marcog94/worker:9.x-cont
-        resources:
-          requests:
-            memory: "1.0Gi"
-            cpu: "500m"
-          limits:
-            memory: "1.0Gi"
-            cpu: "500m"
+        # resources:
+        #   requests:
+        #     memory: "1.0Gi"
+        #     cpu: "500m"
+        #   limits:
+        #     memory: "1.0Gi"
+        #     cpu: "500m"
         env:
         - name: CONDOR_HOST
           value: "htcondor-central-manager"

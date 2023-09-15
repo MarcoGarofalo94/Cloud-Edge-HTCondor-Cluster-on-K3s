@@ -79,6 +79,6 @@ explainer.explain_instance(centroids[args.centroid_idx], model.predict_proba, nu
         features_names), top_labels=len(classes), trainable=True, num_samples=args.num_samples,prefix_instance=str(args.centroid_idx)+"_",output_folder=str(Path(__file__).parent.resolve()))
 linear_models_end = time.time()
 
-with open('/home/slot1_1/linear_models.txt', 'a+') as f:
-    f.write(str(linear_models_end - linear_models_start))
+with open('/home/times/linear_models.txt', 'a+') as f:
+    f.write(str(linear_models_end - linear_models_start)+"\n")
     f.close()

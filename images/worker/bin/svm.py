@@ -49,6 +49,6 @@ print('Error rate:', str(np.sum(y_test != clf_svm.predict(X_test))))
 pickle.dump(clf_svm, open('svm.pkl', 'wb'))
 svm_end = time.time()
 
-with open('/home/slot1_1/svm.txt', 'a+') as f:
-    f.write(str(svm_end - svm_start))
+with open('/home/times/svm.txt', 'a+') as f:
+    f.write(str(svm_end - svm_start)+"\n")
     f.close()

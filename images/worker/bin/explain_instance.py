@@ -78,6 +78,6 @@ if args.verbose:
 
 explain_instance_end = time.time()
 
-with open('/home/slot1_1/explain_instance.txt', 'a+') as f:
-    f.write(str(explain_instance_end - explain_instance_start))
+with open('/home/times/explain_instance.txt', 'a+') as f:
+    f.write(str(explain_instance_end - explain_instance_start)+"\n")
     f.close()

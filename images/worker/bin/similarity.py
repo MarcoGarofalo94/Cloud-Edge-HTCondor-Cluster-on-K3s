@@ -101,6 +101,6 @@ pickle.dump(most_similar_centroid_idx, open(
     "most_similar_centroid_idx.pkl", 'wb'))
 similarity_end = time.time()
 
-with open('/home/slot1_1/similarity.txt', 'a+') as f:
-    f.write(str(similarity_end - similarity_start))
+with open('/home/times/similarity.txt', 'a+') as f:
+    f.write(str(similarity_end - similarity_start)+"\n")
     f.close()
