@@ -54,6 +54,7 @@ RUN chmod 777 /usr/local/bin/*
 COPY lime/* /usr/local/lib64/python3.6/site-packages/lime/
 RUN mkdir /nfs
 RUN chown slot1_1:slot1_1 /nfs
+RUN chmod 777 -R slot1_1
 
 
 # Install yum repository
