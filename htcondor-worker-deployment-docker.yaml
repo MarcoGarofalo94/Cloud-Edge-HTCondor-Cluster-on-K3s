@@ -60,7 +60,7 @@ spec:
           value: "/etc/condor/pool_password/password"
         # - name: DOCKER_HOST
         #   value: unix:///shared/docker.sock
-        # volumeMounts:
+        volumeMounts:
         #   - name: nfs-pvc
         #     mountPath: /nfs
           # - name: shared-lib
@@ -87,7 +87,7 @@ spec:
       #   volumeMounts:
       #     - name: docker-shared
       #       mountPath: /shared
-      # volumes:
+      volumes:
       # - name: nfs-pvc
       #   persistentVolumeClaim:
       #     claimName: nfs-claim
