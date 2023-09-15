@@ -58,8 +58,8 @@ spec:
           value: "htcondor-central-manager"
         - name: SEC_PASSWORD_FILE
           value: "/etc/condor/pool_password/password"
-        - name: DOCKER_HOST
-          value: unix:///shared/docker.sock
+        # - name: DOCKER_HOST
+        #   value: unix:///shared/docker.sock
         # volumeMounts:
         #   - name: nfs-pvc
         #     mountPath: /nfs
@@ -67,8 +67,8 @@ spec:
           #   mountPath: /home/slot1_1/shared-lib
           - name: pool-password
             mountPath: /etc/condor/pool_password
-          - name: docker-shared
-            mountPath: /shared            
+          # - name: docker-shared
+          #   mountPath: /shared            
         ports:
         - containerPort: 9618
           protocol: TCP
@@ -87,15 +87,15 @@ spec:
       #   volumeMounts:
       #     - name: docker-shared
       #       mountPath: /shared
-      volumes:
-      - name: nfs-pvc
-        persistentVolumeClaim:
-          claimName: nfs-claim
+      # volumes:
+      # - name: nfs-pvc
+      #   persistentVolumeClaim:
+      #     claimName: nfs-claim
       # - name: shared-lib
       #   persistentVolumeClaim:
       #     claimName: htcondor-worker-slib-pvc
-      - name: docker-shared
-        emptyDir: {}
+      # - name: docker-shared
+      #   emptyDir: {}
       - name: pool-password
         secret:
           defaultMode: 0600
