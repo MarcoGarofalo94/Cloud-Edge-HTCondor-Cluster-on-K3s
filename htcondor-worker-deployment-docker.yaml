@@ -72,21 +72,21 @@ spec:
         ports:
         - containerPort: 9618
           protocol: TCP
-      - name: dind-daemon
-        image: docker:dind
-        # 64 is the condor group
-        args: ["-G", "64"]
-        resources:
-          limits:
-            memory: "4G"
-        securityContext:
-          privileged: true
-        env:
-          - name: DOCKER_HOST
-            value: unix:///shared/docker.sock
-        volumeMounts:
-          - name: docker-shared
-            mountPath: /shared
+      # - name: dind-daemon
+      #   image: docker:dind
+      #   # 64 is the condor group
+      #   args: ["-G", "64"]
+      #   resources:
+      #     limits:
+      #       memory: "4G"
+      #   securityContext:
+      #     privileged: true
+      #   env:
+      #     - name: DOCKER_HOST
+      #       value: unix:///shared/docker.sock
+      #   volumeMounts:
+      #     - name: docker-shared
+      #       mountPath: /shared
       volumes:
       - name: nfs-pvc
         persistentVolumeClaim:
