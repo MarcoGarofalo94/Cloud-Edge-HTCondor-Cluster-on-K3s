@@ -4,7 +4,7 @@ ARG BASE_IMAGE
 ARG PACKAGE_LIST
 
 LABEL org.opencontainers.image.title="HTCondor Execute image derived from ${BASE_IMAGE}"
-RUN pip3 install xgboost
+#RUN pip3 install xgboost
 
 
 # Create pslots slot users slot1_1 through slot1_64
@@ -13,14 +13,14 @@ RUN \
        useradd slot1_${n} || exit $?; \
    done
 RUN yum install -y sudo
-RUN yum install -y procps
 RUN yum install -y htop
+RUN yum install -y procps
 COPY preStop.sh /
 RUN chmod +x /preStop.sh
 RUN echo "slot1_1 ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 COPY $PACKAGE_LIST /root/extra-packagelist.txt
-COPY container-install-execute.sh /root/container-install-execute.sh
-RUN bash -x /root/container-install-execute.sh /root/extra-packagelist.txt
+#COPY container-install-execute.sh /root/container-install-execute.sh
+#RUN bash -x /root/container-install-execute.sh /root/extra-packagelist.txt
 
 COPY condor/*.conf /etc/condor/config.d/
 
@@ -49,6 +49,8 @@ RUN pip3 install --upgrade matplotlib
 RUN pip3 install --upgrade prettytable
 RUN pip3 install --upgrade kneed
 RUN pip3 install --upgrade pyDOE2
+COPY bin/* /usr/local/bin/
+RUN chmod 777 /usr/local/bin/*
 COPY lime/* /usr/local/lib64/python3.6/site-packages/lime/
 RUN mkdir /nfs
 RUN chown slot1_1:slot1_1 /nfs
@@ -67,7 +69,7 @@ RUN  dnf --enablerepo=powertools install boost-python3 -y
 #RUN yum install -y condor
 # Install Nano
 RUN yum -y install nano
-RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+#RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 
 
 COPY condor_config.local /etc/condor/

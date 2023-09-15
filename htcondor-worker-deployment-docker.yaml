@@ -35,6 +35,8 @@ spec:
       labels:
         app: htcondor-worker
     spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
       containers:
       - name: htcondor-worker
         lifecycle:
