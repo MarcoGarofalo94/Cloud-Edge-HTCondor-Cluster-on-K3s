@@ -32,16 +32,16 @@ y_test = np.load(args.y_test)
 
 parameters = {'C':[0.001,0.01,0.1,1,10,100], 'kernel':['rbf','linear', 'poly', 'sigmoid'], 'gamma': ['scale','auto']}
 svm = SVC(C='C', kernel='kernel', gamma='gamma',probability=True,random_state=args.random_state)
-print('Searching for best parameters...')
+# print('Searching for best parameters...')
 searcher = GridSearchCV(estimator=svm, param_grid=parameters, cv=2,verbose=args.verbose)
 searcher.fit(X_train, y_train)
-print('Best parameters', str(searcher.best_params_))
-print('Best estimators', str(searcher.best_estimator_))
-print('Best estimators', '{:.2%}'.format(searcher.best_score_))
+# print('Best parameters', str(searcher.best_params_))
+# print('Best estimators', str(searcher.best_estimator_))
+# print('Best estimators', '{:.2%}'.format(searcher.best_score_))
 clf_svm = SVC(C=searcher.best_params_['C'], kernel=searcher.best_params_['kernel'], gamma=searcher.best_params_['gamma'],probability=True,random_state=args.random_state)
 clf_svm.fit(X_train, y_train)
 y_pred = clf_svm.predict(X_test)
-print('Error rate:', str(np.sum(y_test != clf_svm.predict(X_test))))
+# print('Error rate:', str(np.sum(y_test != clf_svm.predict(X_test))))
 
 # create output folder if not exists
 # if not os.path.exists(args.output):
@@ -49,6 +49,6 @@ print('Error rate:', str(np.sum(y_test != clf_svm.predict(X_test))))
 pickle.dump(clf_svm, open('svm.pkl', 'wb'))
 svm_end = time.time()
 
-with open('/home/times/svm.txt', 'a+') as f:
-    f.write(str(svm_end - svm_start)+"\n")
+with open('svm.txt', 'a+') as f:
+    f.write(str(svm_start)+" "+str(svm_end)+" "+str(svm_end - svm_start)+"\n")
     f.close()

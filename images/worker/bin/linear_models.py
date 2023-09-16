@@ -16,7 +16,7 @@ linear_models_start = time.time()
 
 
 parser = argparse.ArgumentParser()
-print(str(Path(__file__).parent.resolve()))
+# print(str(Path(__file__).parent.resolve()))
 #Dataset
 parser.add_argument('--X_train', type=str, default="", help='X_train path')
 parser.add_argument('--X_test', type=str, default="", help='X_test path')
@@ -76,9 +76,9 @@ explainer = lime.lime_tabular.LimeTabularExplainer(
 # print(explainer.explain_instance(test[0], clf.predict_proba, num_features=2).as_list())
 
 explainer.explain_instance(centroids[args.centroid_idx], model.predict_proba, num_features=len(
-        features_names), top_labels=len(classes), trainable=True, num_samples=args.num_samples,prefix_instance=str(args.centroid_idx)+"_",output_folder=str(Path(__file__).parent.resolve()))
+        features_names), top_labels=len(classes), trainable=True, num_samples=args.num_samples,prefix_instance=str(args.centroid_idx)+"_",output_folder=".")
 linear_models_end = time.time()
 
-with open('/home/times/linear_models.txt', 'a+') as f:
-    f.write(str(linear_models_end - linear_models_start)+"\n")
+with open("{}_time.txt".format(str(args.centroid_idx,)), 'a+') as f:
+    f.write(str(linear_models_start)+" "+str(linear_models_end)+str(linear_models_end - linear_models_start)+"\n")
     f.close()

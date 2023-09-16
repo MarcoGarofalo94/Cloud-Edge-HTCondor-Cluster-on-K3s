@@ -127,6 +127,6 @@ if args.scale:
 preprocessing_end = time.time()
 
 
-with open('/home/times/preprocessing.txt', 'a+') as f:
-    f.write(str(preprocessing_end - preprocessing_start)+"\n")
+with open('preprocessing.txt', 'a+') as f:
+    f.write(str(preprocessing_start)+" "+str(preprocessing_end)+" "+str(preprocessing_end - preprocessing_start)+"\n")
     f.close()

@@ -67,7 +67,7 @@ explainer = lime.lime_tabular.LimeTabularExplainer(
     X_train, feature_names=features_names, class_names=classes, random_state=args.random_state, mode=args.mode)
 
 explanation = explainer.explain_instance(X_train[args.instance], model.predict_proba, num_features=len(
-        features_names), top_labels=len(classes), trainable=False, num_samples=args.num_samples,prefix_instance=str(centroid_idx)+"_",output_folder=str(Path(__file__).parent.resolve()))
+        features_names), top_labels=len(classes), trainable=False, num_samples=1,prefix_instance=str(centroid_idx)+"_",output_folder=".")
 
 pickle.dump(explanation,open("explanation.pkl",'wb'))
 
@@ -78,6 +78,6 @@ if args.verbose:
 
 explain_instance_end = time.time()
 
-with open('/home/times/explain_instance.txt', 'a+') as f:
-    f.write(str(explain_instance_end - explain_instance_start)+"\n")
+with open('explain_instance.txt', 'a+') as f:
+    f.write(str(explain_instance_start)+" "+str(explain_instance_end)+" "+str(explain_instance_end - explain_instance_start)+"\n")
     f.close()

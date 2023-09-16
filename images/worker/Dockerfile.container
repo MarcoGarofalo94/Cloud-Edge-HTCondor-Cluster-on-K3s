@@ -1,5 +1,5 @@
 ARG BASE_IMAGE=htcondor/base:el8
-FROM --platform=linux/amd64 ${BASE_IMAGE}
+FROM --platform=linux/arm64 ${BASE_IMAGE}
 ARG BASE_IMAGE
 ARG PACKAGE_LIST
 
@@ -50,11 +50,13 @@ RUN pip3 install --upgrade prettytable
 RUN pip3 install --upgrade kneed
 RUN pip3 install --upgrade pyDOE2
 COPY bin/* /usr/local/bin/
-RUN chmod 777 /usr/local/bin/*
+RUN chmod 777 -R /usr/local/bin
 COPY lime/* /usr/local/lib64/python3.6/site-packages/lime/
 RUN mkdir /nfs
 RUN chown slot1_1:slot1_1 /nfs
 RUN mkdir /home/times
+RUN mkdir -p /.config/matplotlib
+RUN chmod 777 -R /.config
 RUN chmod 777 -R /home/times
 
 

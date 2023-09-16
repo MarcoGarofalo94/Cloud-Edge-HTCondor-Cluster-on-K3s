@@ -116,6 +116,6 @@ np.save("centroids.npy", centroids)
 
 clustering_end = time.time()
 
-with open('/home/times/clustering.txt', 'a+') as f:
-    f.write(str(clustering_end - clustering_start)+"\n")
+with open('clustering.txt', 'a+') as f:
+    f.write(str(clustering_start)+" "+str(clustering_end)+" "+str(clustering_end - clustering_start)+"\n")
     f.close()
