@@ -1,0 +1,88 @@
+# Use the official CentOS 8 base image for ARM64
+FROM  --platform=linux/arm64 centos:8
+
+RUN cd /etc/yum.repos.d/
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+RUN yum update -y
+# Install necessary packages
+RUN dnf install -y epel-release && \
+    dnf clean all && \
+    dnf install -y wget
+# Install the HTCondor repository
+RUN wget https://research.cs.wisc.edu/htcondor/repo/9.x/htcondor-release-current.el8.noarch.rpm && \
+    rpm -Uvh htcondor-release-current.el8.noarch.rpm && \
+    rm htcondor-release-current.el8.noarch.rpm
+# # Create pslots slot users slot1_1 through slot1_64
+# RUN \
+#    for n in `seq 1 1`; do \
+#        useradd slot1_${n} || exit $?; \
+#    done
+RUN yum install -y sudo
+RUN yum install -y htop
+RUN yum install -y procps
+COPY preStop.sh /
+RUN chmod +x /preStop.sh
+RUN echo "slot1_1 ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+#COPY $PACKAGE_LIST /root/extra-packagelist.txt
+#COPY container-install-execute.sh /root/container-install-execute.sh
+#RUN bash -x /root/container-install-execute.sh /root/extra-packagelist.txt
+
+COPY condor/*.conf /etc/condor/config.d/
+
+# RUN cd /etc/yum.repos.d/
+# RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+# RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+#Update
+RUN yum update -y 
+
+# Dependencies
+RUN yum -y install wget
+RUN dnf install gcc -y
+#Install Python 3
+RUN dnf install -y python3
+#RUN yum install -y python3-devel
+RUN dnf install -y python2 python2-chardet
+RUN dnf install -y policycoreutils-python-utils
+RUN pip3 install --upgrade pip
+RUN pip3 install --upgrade setuptools
+RUN pip3 install --upgrade wheel
+RUN pip3 install --upgrade numpy
+RUN pip3 install --upgrade pandas
+RUN pip3 install --upgrade scipy
+RUN pip3 install --upgrade scikit-learn
+RUN pip3 install --upgrade matplotlib-arm64
+RUN pip3 install --upgrade prettytable
+RUN pip3 install --upgrade kneed
+RUN pip3 install --upgrade pyDOE2
+COPY bin/* /usr/local/bin/
+RUN chmod 777 -R /usr/local/bin
+COPY lime/* /usr/local/lib64/python3.6/site-packages/lime/
+#RUN mkdir /nfs
+#RUN chown slot1_1:slot1_1 /nfs
+RUN mkdir /home/times
+RUN mkdir -p /.config/matplotlib
+RUN chmod 777 -R /.config
+RUN chmod 777 -R /home/times
+
+
+# Install yum repository
+#RUN cd /etc/yum.repos.d && wget https://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel8.repo
+
+# Import signing key
+#RUN wget http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && rpm --import RPM-GPG-KEY-HTCondor
+
+RUN  dnf --enablerepo=powertools install boost-python3 -y
+# Install HTCondor
+#RUN yum -y install condor
+#RUN yum install -y https://research.cs.wisc.edu/htcondor/repo/9.x/htcondor-release-current.el8.noarch.rpm
+#RUN yum install -y condor
+# Install Nano
+RUN yum -y install nano
+#RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+
+
+COPY condor_config.local /etc/condor/
+COPY worker /etc/condor/config.d/
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]

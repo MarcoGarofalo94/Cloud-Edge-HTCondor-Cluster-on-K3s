@@ -80,5 +80,5 @@ explainer.explain_instance(centroids[args.centroid_idx], model.predict_proba, nu
 linear_models_end = time.time()
 
 with open("{}_time.txt".format(str(args.centroid_idx,)), 'a+') as f:
-    f.write(str(linear_models_start)+" "+str(linear_models_end)+str(linear_models_end - linear_models_start)+"\n")
+    f.write(str(linear_models_start)+" "+str(linear_models_end)+" "str(linear_models_end - linear_models_start)+"\n")
     f.close()
