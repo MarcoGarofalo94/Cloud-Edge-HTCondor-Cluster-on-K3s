@@ -21,7 +21,7 @@ spec:
             exec:
               command: ["/bin/bash", "/preStop.sh"]
         imagePullPolicy: Always
-        image: marcog94/worker:9.0.x-arm64
+        image: marcog94/worker:9.x-arm64
         # resources:
         #   requests:
         #     memory: "1.0Gi"
